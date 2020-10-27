@@ -10,12 +10,19 @@ def scraper(url):
     html = download_html(url)
     soup = BeautifulSoup(html, 'html.parser')
 
+    print("##############################")
     title_links = soup.findAll('h1')
+    print(f'title_links: {title_links}')
+    
     articles = {}
 
     for link in title_links:
         if link.a:
             articles[link.a['href']] = link.text.strip()
+
+    print("##############################")
+    print(f'articles: {articles}')
+    print("##############################")
 
     for article in articles:
         print(f'{articles[article]} - {article}')
