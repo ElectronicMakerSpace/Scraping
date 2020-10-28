@@ -1,6 +1,15 @@
 from bs4 import BeautifulSoup
 import requests, math
 
+
+"""r=0&v=1&pro=1
+r=10&v=1&pro=1
+r=20&v=1&pro=1
+r=30&v=1&pro=1
+r=40&v=1&pro=1
+r=50&v=1&pro=1
+r=60&v=1&pro=1 """
+
 url_origen = 'https://www.agelectronica.com/?n=CODIGO%20ABIERTO,KIT%20ARDUINO&r=0&v=1&pro=1'
 
 TAG = 'CODIGO%20ABIERTO,KIT%20ARDUINO'
@@ -11,20 +20,15 @@ page = requests.get(URL_SINGLE)
 soup = BeautifulSoup(page.content, 'html.parser')
 
 def num_paginas(resultados):
-    for resultado in resultados:
-        sin_espacios = resultado.getText().strip().split()
-        print(f' Texto: {sin_espacios}, tipo{type(sin_espacios)}')
-        inicio = int(sin_espacios[2])
-        fin = int(sin_espacios[4])
-        paginas = math.ceil(fin / inicio)
+    #for resultado in resultados:
+    sin_espacios = resultados[0].getText().strip().split()
+    print(f' Texto: {sin_espacios}, tipo{type(sin_espacios)}')
+    inicio = int(sin_espacios[2])
+    fin = int(sin_espacios[4])
+    paginas = math.ceil(fin / inicio)
 
-        print(f'{int(inicio)}, {int(fin)} tipo inicio: {type(int(inicio))}')
+    print(f'{int(inicio)}, {int(fin)} tipo inicio: {type(int(inicio))}')
     return inicio, fin, paginas
-
-#print(soup.find_all(id="first"))
-
-#print(soup.select("div p"))
-#print(soup.find_all(id="lineas1"))
 
 resultados = soup.findAll("td", {"align": ["right"]})
 inicio, fin, paginas = num_paginas(resultados)
@@ -58,26 +62,9 @@ for numero in range(1, inicio + 1):
         pasos_extra = 2
     ficha_tec = tds[3 + pasos_extra].a['href']
     print(f"ficha_tec: {ficha_tec} {len(ficha_tec)}")
-    #ficha_tec = tds[5].a['href']
-    #print(f"ficha_tec: {ficha_tec} {len(ficha_tec)}")
 
-
-    #existencia = tds[4].select("table tr td")[0].text
-    #print(f"existencia: {existencia} {len(existencia)}")
     existencia = tds[5 + pasos_extra].text
     print(f"existencia: {existencia} {len(existencia)}")
-    #existencia = tds[7].text
-    #print(f"existencia: {existencia} {len(existencia)}")
 
     precio = tds[7 + pasos_extra].text
     print(f"precio: {precio} {len(precio)}")
-    #precio = tds[9].text
-    #print(f"precio: {precio} {len(precio)}")
-
-    """r=0&v=1&pro=1
-    r=10&v=1&pro=1
-    r=20&v=1&pro=1
-    r=30&v=1&pro=1
-    r=40&v=1&pro=1
-    r=50&v=1&pro=1
-    r=60&v=1&pro=1 """

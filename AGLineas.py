@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests, math
 
+#pip freeze > requirements.txt
+
 url_origen = 'https://www.agelectronica.com/?n=CODIGO%20ABIERTO,KIT%20ARDUINO&r=0&v=1&pro=1'
 
 TAG = 'CODIGO%20ABIERTO,KIT%20ARDUINO'
