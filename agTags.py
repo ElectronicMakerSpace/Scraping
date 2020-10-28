@@ -2,7 +2,10 @@ from bs4 import BeautifulSoup
 import requests, math
 
 
-"""r=0&v=1&pro=1
+"""
+div.limiteTABLA table(width="98%") tbody tr td(3) align="right"
+div.limiteTABLA table(width="100%") tbody tr(linea)->td
+r=0&v=1&pro=1
 r=10&v=1&pro=1
 r=20&v=1&pro=1
 r=30&v=1&pro=1
@@ -13,7 +16,7 @@ r=60&v=1&pro=1 """
 url_origen = 'https://www.agelectronica.com/?n=CODIGO%20ABIERTO,KIT%20ARDUINO&r=0&v=1&pro=1'
 
 TAG = 'CODIGO%20ABIERTO,KIT%20ARDUINO'
-URL_SINGLE = f'https://www.agelectronica.com/?n={TAG}&r=0&v=1&pro=1'
+URL_SINGLE = f'https://www.agelectronica.com/?n={TAG}&r=10&v=1&pro=1'
 URL_ALL = f'https://www.agelectronica.com/?n={TAG}&r=30&v=1&pro=1'
 
 page = requests.get(URL_SINGLE)
