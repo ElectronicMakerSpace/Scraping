@@ -19,7 +19,7 @@ TAG = 'CODIGO%20ABIERTO,KIT%20ARDUINO'
 URL_SINGLE = f'https://www.agelectronica.com/?n={TAG}&r=60&v=1&pro=1'
 URL_BASURA = f'https://www.agelectronica.com/?n=115164851d5ededefwrfgref4'
 
-page = requests.get(URL_BASURA)
+page = requests.get(URL_SINGLE)
 soup = BeautifulSoup(page.content, 'html.parser')
 
 def num_paginas(resultados):
@@ -65,7 +65,7 @@ print(f'{len(LINEA_X)}')
 
 lineastr = []
 
-for indice, valor in enumerate(LINEA_X):
+""" for indice, valor in enumerate(LINEA_X):
     atributos = valor.attrs
     #if ['id'] in atributos:
     #    if  'lineas' in atributos['id']:
@@ -74,6 +74,19 @@ for indice, valor in enumerate(LINEA_X):
     if 'style' not in atributos:
         #print(f'{indice}:atributos: {atributos}')
         cadenalinea = atributos['id']
+        lineastr.append(cadenalinea) """
+for a in LINEA_X:
+    atributos = a.attrs
+    if 'style' not in atributos:
+        cadenalinea = atributos['id']
         lineastr.append(cadenalinea)
 
+
 print(f'{lineastr}, len: {len(lineastr)}')
+
+for a in lineastr:
+    print(f'{a} - {type(a)}')
+
+for idx, numero in enumerate(lineastr):
+    print(f'#####Iteracion: {idx + 1}!#####')
+    print(f"id={numero}")
