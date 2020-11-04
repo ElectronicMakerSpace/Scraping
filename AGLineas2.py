@@ -55,8 +55,15 @@ for numero in range(1, inicio + 1):
     clave = tds[1].a.text
     print(f"clave: {clave} {len(clave)}")
 
-    descripcion = tds[2].text.strip()
-    print(f"descripcion: {descripcion} {len(descripcion)}")
+    descrip1 = tds[2].text
+    descripcion = tds[2].findChildren()[0].text.strip()
+    result = descrip1.index(descripcion)
+
+    descripcionTotal = descrip1[:result].strip()
+
+    print("Substring 'is':", result)
+
+    print(f"descripcionTotal: {descripcionTotal} ")
 
     if tam_campos <= 10:
         pasos_extra = 0

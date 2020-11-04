@@ -64,25 +64,26 @@ if paginas >= 1:
             tds = LINEA_X[0].findAll("td")
 
             tam_campos = len(tds)
+            print(f'tam_campos: {tam_campos}')
 
             foto = tds[0].img['src']
-            print(f"foto: {foto} {len(foto)}")
+            print(f"foto: {foto}")
 
             clave = tds[1].a.text
-            print(f"clave: {clave} {len(clave)}")
+            print(f"clave: {clave}")
 
             descripcion = tds[2].text.strip()
-            print(f"descripcion: {descripcion} {len(descripcion)}")
+            print(f"descripcion: {descripcion}")
 
             if tam_campos <= 10:
                 pasos_extra = 0
             else:
                 pasos_extra = 2
             ficha_tec = tds[3 + pasos_extra].a['href']
-            print(f"ficha_tec: {ficha_tec} {len(ficha_tec)}")
+            print(f"ficha_tec: {ficha_tec}")
 
             existencia = tds[5 + pasos_extra].text
-            print(f"existencia: {existencia} {len(existencia)}")
+            print(f"existencia: {existencia}")
 
             precio = tds[7 + pasos_extra].text
-            print(f"precio: {precio} {len(precio)}")
+            print(f"precio: {precio}")
