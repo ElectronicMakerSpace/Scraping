@@ -50,30 +50,28 @@ for numero in range(1, inicio + 1):
         x = x+1 """
 
     foto = tds[0].img['src']
-    print(f"foto: {foto} {len(foto)}")
+    print(f"foto: {foto}")
 
     clave = tds[1].a.text
     print(f"clave: {clave} {len(clave)}")
 
-    descrip1 = tds[2].text
-    descripcion = tds[2].findChildren()[0].text.strip()
-    result = descrip1.index(descripcion)
+    descripcion_completa = tds[2].text
+    descripcion_ingles = tds[2].findChildren()[0].text.strip()
+    result = descripcion_completa.index(descripcion_ingles)
 
-    descripcionTotal = descrip1[:result].strip()
+    descripcion_esp = descripcion_completa[:result].strip()
 
-    print("Substring 'is':", result)
-
-    print(f"descripcionTotal: {descripcionTotal} ")
+    print(f"descripcion_esp: {descripcion_esp} ")
 
     if tam_campos <= 10:
         pasos_extra = 0
     else:
         pasos_extra = 2
     ficha_tec = tds[3 + pasos_extra].a['href']
-    print(f"ficha_tec: {ficha_tec} {len(ficha_tec)}")
+    print(f"ficha_tec: {ficha_tec}")
 
     existencia = tds[5 + pasos_extra].text
-    print(f"existencia: {existencia} {len(existencia)}")
+    print(f"existencia: {existencia}")
 
     precio = tds[7 + pasos_extra].text
-    print(f"precio: {precio} {len(precio)}")
+    print(f"precio: {precio}")

@@ -59,7 +59,7 @@ if paginas >= 1:
         #print(f'{lineastr}, len: {len(lineastr)}')
 
         for idx, linea in enumerate(lineastr):
-            print(f'#####Iteracion: {idx + 1}!#####')
+            print(f'#####Iteracion: {idx + 1}#####')
             LINEA_X = soup.find_all(id=f"{linea}")
             tds = LINEA_X[0].findAll("td")
 
@@ -71,16 +71,29 @@ if paginas >= 1:
 
             clave = tds[1].a.text
             print(f"clave: {clave}")
+    
+            descripcion_completa = tds[2].text
+            descripcion_ingles = tds[2].findChildren()[0].text.strip()
+            result = descripcion_completa.index(descripcion_ingles)
 
-            descripcion = tds[2].text.strip()
-            print(f"descripcion: {descripcion}")
+            descripcion_esp = descripcion_completa[:result].strip()
+            print(f"descripcion: {descripcion_esp}")
 
             if tam_campos <= 10:
                 pasos_extra = 0
+            elif tam_campos == 11:
+                pasos_extra = 1
             else:
                 pasos_extra = 2
-            ficha_tec = tds[3 + pasos_extra].a['href']
-            print(f"ficha_tec: {ficha_tec}")
+            
+            link = tds[3 + pasos_extra].findChildren()
+            atributos = link[0].attrs
+
+            if 'href' in atributos:
+                ficha_tec = tds[3 + pasos_extra].a['href']
+                print(f"ficha_tec: {ficha_tec}")
+            else:
+                ficha_tec = "No hay ficha tecnica"
 
             existencia = tds[5 + pasos_extra].text
             print(f"existencia: {existencia}")
