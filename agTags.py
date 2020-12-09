@@ -2,10 +2,16 @@ from bs4 import BeautifulSoup
 import requests, math
 
 url_origen = 'https://www.agelectronica.com/?n=CODIGO%20ABIERTO,KIT%20ARDUINO&r=0&v=1&pro=1'
-TAG = 'CODIGO%20ABIERTO,KIT%20ARDUINO'
+#TAG = 'CODIGO%20ABIERTO,KIT%20ARDUINO'
+#TAG = 'PROTECCION,SANITIZANTES,GERMICIDAS'
+TAG = 'CODIGO ABIERTO,SENSOR,ORIENTACION'
+
+
 paginaInit = 0
 URL_SINGLE = f'https://www.agelectronica.com/?n={TAG}&r={paginaInit}&v=1&pro=1'
 URL_BASURA = f'https://www.agelectronica.com/?n=testderesultados'
+
+
 
 paginaInicio = requests.get(URL_SINGLE)
 soup = BeautifulSoup(paginaInicio.content, 'html.parser')
@@ -66,6 +72,8 @@ if paginas >= 1:
             tam_campos = len(tds)
             print(f'tam_campos: {tam_campos}')
 
+            fotox = tds[0]
+            print(f"fotox: {fotox}")
             foto = tds[0].img['src']
             print(f"foto: {foto}")
 
@@ -83,9 +91,10 @@ if paginas >= 1:
                 pasos_extra = 0
             elif tam_campos == 11:
                 pasos_extra = 1
-            else:
+            elif tam_campos == 12:
                 pasos_extra = 2
-            
+            elif tam_campos == 13:
+                pasos_extra = 3
             link = tds[3 + pasos_extra].findChildren()
             atributos = link[0].attrs
 
@@ -94,6 +103,7 @@ if paginas >= 1:
                 print(f"ficha_tec: {ficha_tec}")
             else:
                 ficha_tec = "No hay ficha tecnica"
+                print(f"ficha_tec: {ficha_tec}")
 
             existencia = tds[5 + pasos_extra].text
             print(f"existencia: {existencia}")
